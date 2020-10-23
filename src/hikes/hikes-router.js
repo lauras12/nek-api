@@ -1,5 +1,5 @@
 const express = require('express');
-const hikessRouter = express.Router();
+const hikesRouter = express.Router();
 const HikesService = require('./hikess-service');
 const { requireAuth } = require('../middleware/jwt-auth');
 const jsonParser = express.json();
@@ -7,7 +7,6 @@ const path = require('path');
 
 hikesRouter
     .route('/api/hikes')
-    // .all(requireAuth)
     .get((req, res, next) => {
         const knexInstance = req.app.get('db')
         HikesService.getAllUserHikess(knexInstance)
@@ -40,11 +39,6 @@ hikesRouter
                     title: hike.title,
                     author: hike.author,
                     assignedTracks: [],
-                    warmUp: [],
-                    midHike: [],
-                    peakTrack: [],
-                    breakTracks: [],
-                    afterPeak: [],
                 };
 
                 hike = currentHike;
@@ -103,11 +97,6 @@ hikesRouter
                     title: hike[0].title,
                     author: hike[0].author,
                     assignedTracks: [],
-                    warmUp: [],
-                    midHike: [],
-                    peakTrack: [],
-                    breakTracks: [],
-                    afterPeak: [],
                 };
 
                 hike.map(hike => {
