@@ -1,6 +1,6 @@
 const express = require('express');
 const hikesRouter = express.Router();
-const HikesService = require('./hikess-service');
+const HikesService = require('./hikes-service');
 const { requireAuth } = require('../middleware/jwt-auth');
 const jsonParser = express.json();
 const path = require('path');
