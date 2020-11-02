@@ -3,12 +3,8 @@ const TracksService = {
         return knex
             .from('trail_tracks AS ps').select(
                 'ps.id',
-                'ps.name_eng',
-                'ps.alias',
-                'ps.name_san',
                 'ps.track_type',
                 'ps.track_level',
-                'ps.img'
             );
     },
 
@@ -17,14 +13,8 @@ const TracksService = {
             .from('trail_tracks AS ps')
             .select(
                 'ps.id',
-                'ps.name_eng',
-                'ps.alias',
-                'ps.name_san',
-                'ps.benefits',
                 'ps.track_type',
                 'ps.track_level',
-                'ps.img',
-                'ps.video',
             )
             .where(
                 'ps.id',

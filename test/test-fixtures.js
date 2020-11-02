@@ -112,8 +112,6 @@ function seedTracksAttNotes(db, users, tracks, attributes, notes) {
 function makeExpectedListtrack(track) {
     return ({
         id: track.id,
-        name_eng: track.name_eng,
-        benefits: '',
         track_level: track.track_level,
     });
 }
@@ -121,8 +119,6 @@ function makeExpectedListtrack(track) {
 function makeExpectedFullTrack(track) {
     return ({
         id: track.id,
-        name_eng: track.name_eng,
-        benefits: '',
         track_level: track.track_level,
     });
 }
@@ -135,8 +131,6 @@ function makeExpectedTrackAttributes(user, track, hikeId, attributes) {
     newestTrackAttributes.forEach(att => attributesList[att.attribute] = true);
     return ({
             id: track.id,
-            name_eng: track.name_eng,
-            benefits: '',
             track_level: track.track_level,
             attributesList: Object.keys(attributesList),
     });
@@ -151,8 +145,6 @@ function makeExpectedTrackNotes(user, track, hikeId, notes) {
 
     return ({
             id: track.id,
-            name_eng: track.name_eng,
-            benefits: '',
             track_level: track.track_level,
             notes: Object.keys(notesList)
     });

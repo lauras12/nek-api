@@ -185,14 +185,12 @@ function makeTestFixtures() {
 function makeMaliciousTrack() {
     const maliciousTrack = {
         id: 911,
-        name_eng: '<script>alert("xss");</script>',
         alias: '<script>alert("xss");</script>',
         benefits: '<img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">',
         track_level: '<img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">',
     };
 
     const expectedTrack = {
-        name_eng: '&lt;script&gt;alert("xss");&lt;/script&gt;',
         alias: '&lt;script&gt;alert("xss");&lt;/script&gt;',
         benefits: '<img src="https://url.to.file.which/does-not.exist">',
         track_level: '<img src="https://url.to.file.which/does-not.exist">',

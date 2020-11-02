@@ -9,28 +9,17 @@ const xss = require('xss');
 const serializeTrack = (track) => {
     return ({
         id: track.id,
-        name_eng: xss(track.name_eng),
-        alias: xss(track.alias),
-        name_san: xss(track.name_san),
         benefits: xss(track.benefits),
         track_level: xss(track.track_level),
-        track_type: xss(track.track_type),
-        img: xss(track.img),
-        video: track.video,
+        track_type: xss(track.track_type)
     });
 }
 
 const serializeAttTrack = (track) => {
     return ({
         id: track.id,
-        name_eng: xss(track.name_eng),
-        alias: xss(ptrack.alias),
-        name_san: xss(track.name_san),
-        benefits: xss(track.benefits),
         track_level: xss(track.track_level),
         track_type: xss(track.track_type),
-        img: xss(track.img),
-        video: track.video,
         attributesList: track.attributesList.map(att => xss(att)),
         notes: track.notes.map(note => xss(note)),
     });
