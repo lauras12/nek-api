@@ -111,8 +111,7 @@ hikesRouter
                     id: currentHike.id,
                     title: currentHike.title,
                     author: currentHike.author,
-                    assignedTracks: [currentHike.warmUp, currentHike.midHike, currentHike.peakTrack, currentHike.breakTracks, currentHike.afterPeak],
-                };
+                 };
 
                 next();
             })

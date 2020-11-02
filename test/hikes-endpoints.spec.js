@@ -83,11 +83,6 @@ describe('Hikes endpoints', function () {
                 title,
                 author,
                 assignedTracks: [],
-                warmUp: [],
-                midHike: [],
-                peakTrack: [],
-                breakTracks: [],
-                afterPeak: [],
             };
 
             return supertest(app)

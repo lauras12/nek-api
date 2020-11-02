@@ -109,7 +109,7 @@ function seedTracksAttNotes(db, users, tracks, attributes, notes) {
 }
 
 
-function makeExpectedListtrack(track) {
+function makeExpectedListTrack(track) {
     return ({
         id: track.id,
         track_level: track.track_level,
