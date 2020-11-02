@@ -32,7 +32,7 @@ hikesRouter
             }
         }
 
-        HikesService.postNewFlow(knexInstance, newHike)
+        HikesService.postNewHike(knexInstance, newHike)
             .then(hike => {
                 const currentHike = {
                     id: hike.id,
@@ -86,7 +86,7 @@ hikesRouter
     .all((req, res, next) => {
         const knexInstance = req.app.get('db');
         const hikeId = Number(req.params.hike_id);
-        HikesService.getAllPosesInHike(knexInstance, hikeId)
+        HikesService.getAllTracksInHike(knexInstance, hikeId)
             .then(hike => {
                 if (!hike[0]) {
                     return res.status(400).send({ error: { message: `Hike with id ${hikeId} doesn't exist` } });
