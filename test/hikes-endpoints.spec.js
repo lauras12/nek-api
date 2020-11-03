@@ -239,11 +239,9 @@ describe('Hikes endpoints', function () {
 
             it('returns hike with all its tracks', () => {
                 const hikeId = testHikes[0].id;
-                const author = testUsers[0].id;
                 const expectedHike = {
                     id: testHikes[0].id,
                     title: testHikes[0].title,
-                    author: author,
                     assignedTracks: [[1, 2], [1], [], [], []]
                 };
 

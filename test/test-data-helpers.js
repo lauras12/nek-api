@@ -2,27 +2,23 @@ function makeTracksArray() {
     return [
         {
             id: 1,
-            nameEng: 'test-track 1',
             benefits: 'track1 benefits',
-            level: 'track1 level'
+            track_level: 'track1 level'
         },
         {
             id: 2,
-            nameEng: 'test-track 2',
             benefits: 'track2 benefits',
-            level: 'track2 level'
+            track_level: 'track2 level'
         },
         {
             id: 3,
-            nameEng: 'test-track 3',
             benefits: 'track3 benefits',
-            level: 'track3 level'
+            track_level: 'track3 level'
         },
         {
             id: 4,
-            nameEng: 'test-track 4',
             benefits: 'track4 benefits',
-            level: 'track4 level'
+            track_level: 'track4 level'
         },
     ];
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --require test/setup.js",
     "dev": "nodemon src/server.js",
-    "migrate": "postgrator --config postgrator-config.js",
+    "migrate": "npx postgrator --config postgrator-config.js",
     "migrate:test": "env NODE_ENV=test npm run migrate",
     "migrate:production": "heroku run npm run migrate",
     "start": "node src/server.js",
@@ -35,6 +35,7 @@
     "morgan": "^1.9.1",
     "nodemon": "^2.0.6",
     "pg": "^8.4.2",
+    "postgrator-cli": "^4.0.0",
     "xss": "^1.0.8"
   },
   "devDependencies": {

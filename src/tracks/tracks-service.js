@@ -13,8 +13,8 @@ const TracksService = {
             .from('trail_tracks AS ps')
             .select(
                 'ps.id',
-                'ps.track_type',
                 'ps.track_level',
+                'ps.benefits',
             )
             .where(
                 'ps.id',

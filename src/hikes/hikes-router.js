@@ -23,7 +23,6 @@ hikesRouter
         const knexInstance = req.app.get('db');
         const newHike = {
             title: req.body.title,
-            author: req.user.id,
         };
         
         for (const [key, value] of Object.entries(newHike)) {
@@ -37,7 +36,6 @@ hikesRouter
                 const currentHike = {
                     id: hike.id,
                     title: hike.title,
-                    author: hike.author,
                     assignedTracks: [],
                 };
 
