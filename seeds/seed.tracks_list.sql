@@ -3,7 +3,7 @@ BEGIN;
 INSERT INTO trail_tracks (name, difficulty, name_reg, track_level, track_type, img)
 VALUES
 
-('Barr Hill', 'high', 'State Park', 'begginer', 'loop', 'https://images.pexels.com/photos/615348/forest-fog-sunny-nature-615348.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' ),
+('Barr Hill', 'high', 'State Park', '', 'loop', 'https://images.pexels.com/photos/615348/forest-fog-sunny-nature-615348.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' ),
 ('Half  Track', 'easy','State Park', 'intermediate', 'loop', 'https://images.pexels.com/photos/1194235/pexels-photo-1194235.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
 ('Revolving Track','moderate', 'State Park', 'intermediate', 'loop', 'https://images.pexels.com/photos/615348/forest-fog-sunny-nature-615348.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
 ('Side Track','moderate', 'State Park', 'beginner', 'loop', 'https://images.pexels.com/photos/1194235/pexels-photo-1194235.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
@@ -40,6 +40,7 @@ VALUES
 ('Sherburne Pass', 'high', 'State Park', 'intermediate', 'loop', 'https://images.pexels.com/photos/1194235/pexels-photo-1194235.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
 ('the Chin','easy', 'State Park', 'advanced', 'out and back', 'https://images.pexels.com/photos/615348/forest-fog-sunny-nature-615348.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
 ('Canteliver Rock', 'high', 'State Park', 'beginner', 'loop', 'https://images.pexels.com/photos/1194235/pexels-photo-1194235.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' );
+
 COMMIT;     
        
        
