@@ -59,7 +59,6 @@ describe('Tracks endpoints', function () {
                     .expect(200)
                     .expect(res => {
                         expect(res.body[0].track_level).to.eql(expectedTrack.track_level);
-                        expect(res.body[0].track_type).to.eql(expectedTrack.track_type);
                     });
             });
         });
@@ -137,7 +136,6 @@ describe('Tracks endpoints', function () {
                     .expect(200)
                     .expect(res => {
                         expect(res.body.track_level).to.eql(expectedTrack.track_level);
-                        expect(res.body.track_type).to.eql(expectedTrack.track_type);
                     });
             });
         });
@@ -184,7 +182,7 @@ describe('Tracks endpoints', function () {
             it('responds 200 and returns selected track without attributes or notes', () => {
                 const trackId = 2;
                 const hikeId = 2;
-                const expectedTrack = fixtures.makeExpectedFullTrack(testTracks[TrackId - 1]);
+                const expectedTrack = fixtures.makeExpectedFullTrack(testTracks[trackId - 1]);
                 return supertest(app)
                     .get(`/api/hike/${hikeId}/${trackId}`)
                     .set('Authorization', fixtures.makeAuthHeader(testUsers[0]))

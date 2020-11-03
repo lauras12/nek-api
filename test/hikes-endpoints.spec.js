@@ -126,7 +126,7 @@ describe('Hikes endpoints', function () {
                         .then(() => {
                             return db
                                 .into('trail_tracks')
-                                .insert(testtracks)
+                                .insert(testTracks)
                                 .then(() => {
                                     return db
                                         .into('section_hikes')

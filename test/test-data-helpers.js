@@ -2,22 +2,18 @@ function makeTracksArray() {
     return [
         {
             id: 1,
-            benefits: 'track1 benefits',
             track_level: 'track1 level'
         },
         {
             id: 2,
-            benefits: 'track2 benefits',
             track_level: 'track2 level'
         },
         {
             id: 3,
-            benefits: 'track3 benefits',
             track_level: 'track3 level'
         },
         {
             id: 4,
-            benefits: 'track4 benefits',
             track_level: 'track4 level'
         },
     ];
@@ -181,14 +177,9 @@ function makeTestFixtures() {
 function makeMaliciousTrack() {
     const maliciousTrack = {
         id: 911,
-        alias: '<script>alert("xss");</script>',
-        benefits: '<img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">',
-        track_level: '<img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">',
     };
 
     const expectedTrack = {
-        alias: '&lt;script&gt;alert("xss");&lt;/script&gt;',
-        benefits: '<img src="https://url.to.file.which/does-not.exist">',
         track_level: '<img src="https://url.to.file.which/does-not.exist">',
     };
 
