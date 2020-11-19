@@ -1,21 +1,21 @@
 const TracksService = {
     getAllTracks: (knex) => {
         return knex
-            .from('trail_tracks AS ps').select(
-                'ps.id',
-                'ps.track_level',
+            .from('trail_tracks AS tr').select(
+                'tr.id',
+                'tr.track_level',
             );
     },
 
     getTrackById: (knex, trackId) => {
         return knex
-            .from('trail_tracks AS ps')
+            .from('trail_tracks AS tr')
             .select(
-                'ps.id',
-                'ps.track_level',
+                'tr.id',
+                'tr.track_level',
             )
             .where(
-                'ps.id',
+                'tr.id',
                 trackId
             )
             .first();
@@ -23,23 +23,23 @@ const TracksService = {
 
     getTrackAttNotesById: (knex, trackId, hikeId) => {
         return knex
-            .from('track_attributes AS ps_att')
+            .from('track_attributes AS tr_att')
             .select(
-                'ps_att.attribute',
-                'ps_att.track_id',
-                'ps_att.assigned_hike_id',
-                'ps_att.author',
+                'tr_att.attribute',
+                'tr_att.track_id',
+                'tr_att.assigned_hike_id',
+                'tr_att.author',
                 'pn.notes',
             )
             .join(
                 'track_notes AS pn',
-                'ps_att.track_id',
+                'tr_att.track_id',
                 'pn.track_id'
             )
             .where(
                 {
-                    'ps_att.assigned_hike_id': hikeId,
-                    'ps_att.track_id': trackId,
+                    'tr_att.assigned_hike_id': hikeId,
+                    'tr_att.track_id': trackId,
                 }
             );
     },
