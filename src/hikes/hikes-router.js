@@ -9,7 +9,7 @@ hikesRouter
     .route('/api/hikes')
     .get((req, res, next) => {
         const knexInstance = req.app.get('db')
-        HikesService.getAllUserHikess(knexInstance)
+        HikesService.getAllUserHikes(knexInstance)
             .then(hikes => {
                 res.json(hikes);
             })
@@ -23,6 +23,7 @@ hikesRouter
         const knexInstance = req.app.get('db');
         const newHike = {
             title: req.body.title,
+            author: req.user.id
         };
         
         for (const [key, value] of Object.entries(newHike)) {
@@ -55,7 +56,7 @@ hikesRouter
         
         const knexInstance = req.app.get('db');
         const { main_hike_id, track_id, section_hike_id } = req.body;
-        
+
         const newHikesTrack = {
             main_hike_id,
             author: req.user.id,

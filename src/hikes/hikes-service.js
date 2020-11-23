@@ -1,7 +1,7 @@
 const HikesService = {
     getAllUserHikes: (knex) => {
         return knex
-            .from('hike AS hi')
+            .from('hikes AS hi')
             .select(
                 'hi.id',
                 'hi.title',
