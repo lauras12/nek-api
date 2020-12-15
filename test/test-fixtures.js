@@ -112,14 +112,27 @@ function seedTracksAttNotes(db, users, tracks, attributes, notes) {
 function makeExpectedListTrack(track) {
     return ({
         id: track.id,
+        name_eng: track.name_eng,
+        alias: track.alias,
+        name_san: track.name_san,
+        benefits: '',
+        track_type: track.track_type,
         track_level: track.track_level,
+        img: track.img
     });
 }
 
 function makeExpectedFullTrack(track) {
     return ({
         id: track.id,
+        name_eng: track.name_eng,
+        alias: track.alias,
+        name_san: track.name_san,
+        benefits: track.benefits,
+        track_type: track.track_type,
         track_level: track.track_level,
+        img: track.img,
+        video: track.video,
     });
 }
 
@@ -130,9 +143,16 @@ function makeExpectedTrackAttributes(user, track, hikeId, attributes) {
     let attributesList = {};
     newestTrackAttributes.forEach(att => attributesList[att.attribute] = true);
     return ({
-            id: track.id,
-            track_level: track.track_level,
-            attributesList: Object.keys(attributesList),
+        id: track.id,
+        name_eng: track.name_eng,
+        alias: track.alias,
+        name_san: track.name_san,
+        benefits: track.benefits,
+        track_type: track.track_type,
+        track_level: track.track_level,
+        img: track.img,
+        video: track.video,
+        attributesList: Object.keys(attributesList),
     });
 }
 
@@ -144,9 +164,16 @@ function makeExpectedTrackNotes(user, track, hikeId, notes) {
     newestTrackNotes.forEach(n => notesList[n.notes] = true);
 
     return ({
-            id: track.id,
-            track_level: track.track_level,
-            notes: Object.keys(notesList)
+        id: track.id,
+        name_eng: track.name_eng,
+        alias: track.alias,
+        name_san: track.name_san,
+        benefits: track.benefits,
+        track_type: track.track_type,
+        track_level: track.track_level,
+        img: track.img,
+        video: track.video,
+        notes: Object.keys(notesList)
     });
 }
 

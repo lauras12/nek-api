@@ -1,14 +1,14 @@
 const HikesService = {
     getAllUserHikes: (knex) => {
         return knex
-            .from('hikes AS hi')
+            .from('hikes AS fl')
             .select(
-                'hi.id',
-                'hi.title',
-                'hi.author')
+                'fl.id',
+                'fl.title',
+                'fl.author')
             .join(
                 'users AS usr',
-                'hi.author',
+                'fl.author',
                 'usr.id'
             );
     },
@@ -29,27 +29,27 @@ const HikesService = {
 
     getAllTracksInHike: (knex, hikeId) => {
         return knex
-            .from('hikes AS hi')
+            .from('hikes AS fl')
             .select(
-                'hi.title',
-                'hi.id',
-                'hi_tr.main_hike_id',
-                'hi_tr.author',
-                'hi_tr.track_id',
-                'hi_tr.section_hike_id',
-                'shi.section',
+                'fl.title',
+                'fl.id',
+                'fl_ps.main_hike_id',
+                'fl_ps.author',
+                'fl_ps.track_id',
+                'fl_ps.section_hike_id',
+                'sfl.section',
             )
             .leftJoin(
-                'hikes_tracks AS hi_tr',
-                'hi.id',
-                'hi_tr.main_hike_id')
+                'hikes_tracks AS fl_ps',
+                'fl.id',
+                'fl_ps.main_hike_id')
             .leftJoin(
-                'section_hikes AS shi',
-                'hi_tr.section_hike_id',
-                'shi.id'
+                'section_hikes AS sfl',
+                'fl_ps.section_hike_id',
+                'sfl.id'
             )
             .where(
-                'hi.id',
+                'fl.id',
                 hikeId
             );
     },

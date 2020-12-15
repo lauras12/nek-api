@@ -58,7 +58,12 @@ describe('Tracks endpoints', function () {
                     .get('/api/tracks')
                     .expect(200)
                     .expect(res => {
+                        expect(res.body[0].name_eng).to.eql(expectedTrack.name_eng);
+                        expect(res.body[0].name_san).to.eql(expectedTrack.name_san);
+                        expect(res.body[0].alias).to.eql(expectedTrack.alias);
                         expect(res.body[0].track_level).to.eql(expectedTrack.track_level);
+                        expect(res.body[0].track_type).to.eql(expectedTrack.track_type);
+                        expect(res.body[0].img).to.eql(expectedTrack.img);
                     });
             });
         });
@@ -135,7 +140,12 @@ describe('Tracks endpoints', function () {
                     .set('Authorization', fixtures.makeAuthHeader(testUsers[0]))
                     .expect(200)
                     .expect(res => {
+                        expect(res.body.name_eng).to.eql(expectedTrack.name_eng);
+                        expect(res.body.name_san).to.eql(expectedTrack.name_san);
+                        expect(res.body.alias).to.eql(expectedTrack.alias);
                         expect(res.body.track_level).to.eql(expectedTrack.track_level);
+                        expect(res.body.track_type).to.eql(expectedTrack.track_type);
+                        expect(res.body.img).to.eql(expectedTrack.img);
                     });
             });
         });

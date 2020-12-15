@@ -9,14 +9,28 @@ const xss = require('xss');
 const serializeTrack = (track) => {
     return ({
         id: track.id,
-        track_level: xss(track.track_level)
+        name_eng: xss(track.name_eng),
+        alias: xss(track.alias),
+        name_san: xss(track.name_san),
+        benefits: xss(track.benefits),
+        track_level: xss(track.track_level),
+        track_type: xss(track.track_type),
+        img: xss(track.img),
+        video: track.video,
     });
 }
 
 const serializeAttTrack = (track) => {
     return ({
         id: track.id,
+        name_eng: xss(track.name_eng),
+        alias: xss(track.alias),
+        name_san: xss(track.name_san),
+        benefits: xss(track.benefits),
         track_level: xss(track.track_level),
+        track_type: xss(track.track_type),
+        img: xss(track.img),
+        video: track.video,
         attributesList: track.attributesList.map(att => xss(att)),
         notes: track.notes.map(note => xss(note)),
     });
@@ -32,7 +46,7 @@ tracksRouter
             });
     });
 
-    tracksRouter
+tracksRouter
     .route('/api/hike/:track_id')
     .all(requireAuth)
     .all((req, res, next) => {
@@ -93,7 +107,7 @@ tracksRouter
         res.status(200).json(serializeAttTrack(res.trackAttributes));
     });
 
- tracksRouter
+tracksRouter
     .route('/api/hikeatt/:track_id')
     .all(requireAuth)
     .post(jsonParser, (req, res, next) => {
@@ -129,7 +143,7 @@ tracksRouter
         .catch(next);
     });
 
-    tracksRouter
+tracksRouter
     .route(('/api/hikenote/:track_id'))
     .all(requireAuth)
     .post(jsonParser, (req, res, next) => {

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -23,7 +24,6 @@ app.use(hikesRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello, from Trail capstone!');
-    res.send('Hello, world!');
 });
 
 app.use(function errorHandler(error, req, res, next) {
@@ -36,4 +36,5 @@ app.use(function errorHandler(error, req, res, next) {
     console.error(error);
     res.status(500).json(response);
 });
+
 module.exports = app;

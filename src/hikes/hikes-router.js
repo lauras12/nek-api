@@ -7,6 +7,7 @@ const path = require('path');
 
 hikesRouter
     .route('/api/hikes')
+    // .all(requireAuth)
     .get((req, res, next) => {
         const knexInstance = req.app.get('db')
         HikesService.getAllUserHikes(knexInstance)
@@ -23,7 +24,7 @@ hikesRouter
         const knexInstance = req.app.get('db');
         const newHike = {
             title: req.body.title,
-            author: req.user.id
+            author: req.user.id,
         };
         
         for (const [key, value] of Object.entries(newHike)) {
@@ -37,7 +38,13 @@ hikesRouter
                 const currentHike = {
                     id: hike.id,
                     title: hike.title,
+                    author: hike.author,
                     assignedTracks: [],
+                    warmUp: [],
+                    midHike: [],
+                    peakTrack: [],
+                    breakTracks: [],
+                    afterPeak: [],
                 };
 
                 hike = currentHike;
@@ -56,7 +63,7 @@ hikesRouter
         
         const knexInstance = req.app.get('db');
         const { main_hike_id, track_id, section_hike_id } = req.body;
-
+        
         const newHikesTrack = {
             main_hike_id,
             author: req.user.id,
@@ -96,6 +103,11 @@ hikesRouter
                     title: hike[0].title,
                     author: hike[0].author,
                     assignedTracks: [],
+                    warmUp: [],
+                    midHike: [],
+                    peakTrack: [],
+                    breakTracks: [],
+                    afterPeak: [],
                 };
 
                 hike.map(hike => {
@@ -110,7 +122,8 @@ hikesRouter
                     id: currentHike.id,
                     title: currentHike.title,
                     author: currentHike.author,
-                 };
+                    assignedTracks: [currentHike.warmUp, currentHike.midHike, currentHike.peakTrack, currentHike.breakTracks, currentHike.afterPeak],
+                };
 
                 next();
             })
@@ -120,7 +133,7 @@ hikesRouter
         res.status(200).json(res.hike);
     });
 
-    hikesRouter
+hikesRouter
 .route('/api/delete/:hike_id/:track_id')
 .all(requireAuth)
 .delete((req,res,next) => {

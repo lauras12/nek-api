@@ -83,6 +83,11 @@ describe('Hikes endpoints', function () {
                 title,
                 author,
                 assignedTracks: [],
+                warmUp: [],
+                midHike: [],
+                peakTrack: [],
+                breakTracks: [],
+                afterPeak: [],
             };
 
             return supertest(app)
@@ -151,8 +156,8 @@ describe('Hikes endpoints', function () {
                 .expect(201)
                 .expect(res => {
                     expect(res.body.main_hike_id).to.eql(newHikeTrack.main_hike_id);
-                    expect(res.body.author).to.eql(newhHikeTrack.author);
-                    expect(res.body.track_id).to.eql(newhHikeTrack.track_id);
+                    expect(res.body.author).to.eql(newHikeTrack.author);
+                    expect(res.body.track_id).to.eql(newHikeTrack.track_id);
                     expect(res.body.section_hike_id).to.eql(newHikeTrack.section_hike_id);
                     expect(res.headers.location).to.eql(`/api/hike-track/${res.body.main_hike_id}`);
                 })
@@ -239,9 +244,11 @@ describe('Hikes endpoints', function () {
 
             it('returns hike with all its tracks', () => {
                 const hikeId = testHikes[0].id;
+                const author = testUsers[0].id;
                 const expectedHike = {
                     id: testHikes[0].id,
                     title: testHikes[0].title,
+                    author: author,
                     assignedTracks: [[1, 2], [1], [], [], []]
                 };
 

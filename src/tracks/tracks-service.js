@@ -1,21 +1,33 @@
 const TracksService = {
     getAllTracks: (knex) => {
         return knex
-            .from('trail_tracks AS tr').select(
-                'tr.id',
-                'tr.track_level',
+            .from('trail_tracks AS ps').select(
+                'ps.id',
+                'ps.name_eng',
+                'ps.alias',
+                'ps.name_san',
+                'ps.track_type',
+                'ps.track_level',
+                'ps.img'
             );
     },
 
     getTrackById: (knex, trackId) => {
         return knex
-            .from('trail_tracks AS tr')
+            .from('trail_tracks AS ps')
             .select(
-                'tr.id',
-                'tr.track_level',
+                'ps.id',
+                'ps.name_eng',
+                'ps.alias',
+                'ps.name_san',
+                'ps.benefits',
+                'ps.track_type',
+                'ps.track_level',
+                'ps.img',
+                'ps.video',
             )
             .where(
-                'tr.id',
+                'ps.id',
                 trackId
             )
             .first();
@@ -23,23 +35,23 @@ const TracksService = {
 
     getTrackAttNotesById: (knex, trackId, hikeId) => {
         return knex
-            .from('track_attributes AS tr_att')
+            .from('track_attributes AS ps_att')
             .select(
-                'tr_att.attribute',
-                'tr_att.track_id',
-                'tr_att.assigned_hike_id',
-                'tr_att.author',
+                'ps_att.attribute',
+                'ps_att.track_id',
+                'ps_att.assigned_hike_id',
+                'ps_att.author',
                 'pn.notes',
             )
             .join(
                 'track_notes AS pn',
-                'tr_att.track_id',
+                'ps_att.track_id',
                 'pn.track_id'
             )
             .where(
                 {
-                    'tr_att.assigned_hike_id': hikeId,
-                    'tr_att.track_id': trackId,
+                    'ps_att.assigned_hike_id': hikeId,
+                    'ps_att.track_id': trackId,
                 }
             );
     },
