@@ -11,6 +11,7 @@ const authRouter = require('./auth/auth-router');
 const hikesRouter = require('./hikes/hikes-router');
 const morganOption = (NODE_ENV === 'production')? 'tiny' : 'common';
 
+const {CLIENT_ORIGIN} = require('./config');
 
 app.use(cors());
 app.use(morgan(morganOption));
