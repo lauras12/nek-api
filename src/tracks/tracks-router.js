@@ -5,6 +5,7 @@ const { requireAuth } = require('../middleware/jwt-auth');
 const jsonParser = express.json();
 const path = require('path');
 const xss = require('xss');
+const STORE = require('../../STORE.js');
 
 const serializeTrack = (track) => {
     return ({
@@ -39,11 +40,12 @@ const serializeAttTrack = (track) => {
 tracksRouter
     .route('/api/tracks')
     .get((req, res, next) => {
-        const knexInstance = req.app.get('db')
-        TracksService.getAllTracks(knexInstance)
-            .then(tracks => {
-                res.status(200).json(tracks.map(serializeTrack));
-            });
+        
+        //const knexInstance = req.app.get('db')
+      //  TracksService.getAllTracks(knexInstance)
+        //    .then(tracks => {
+                res.status(200).json(STORE.tracks.map(serializeTrack));
+         //   });
     });
 
 tracksRouter

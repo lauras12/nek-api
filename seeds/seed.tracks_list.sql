@@ -1,9 +1,9 @@
 BEGIN;
 
-INSERT INTO trail_tracks (name_eng, alias, name_san, benefits, track_level, track_type, img, video)
+INSERT INTO trail_tracks (name_eng, alias, benefits, track_level, track_type)
 VALUES
 
-('Fierce Pose', 'Chair', 'Utkatasana', 'Improves balance, mobility, posture, strengthens legs, glutes and ankles, opens chest and shoulders', 'begginer', 'balancing, standing pose', 'https://yoga-track.s3.us-east-2.amazonaws.com/chair.png', 'https://www.youtube.com/embed/Kp7XJkG9ubc' ),
+('Barr Hill Track', 'Barr Hill', 'Strengthens legs', 'begginer', 'easy track' ),
 ('Half Lord of the Fishes Pose', 'Sitting Half Spinal Twist','Matsyendrasana', 'Strengthens and lengthens the spine, cleanses internal organs, activates digestive tract, opens the chest and heart space', 'intermediate', 'seated, twist', 'https://yoga-track.s3.us-east-2.amazonaws.com/matsyendrasana.png', 'https://www.youtube.com/embed/OMGUMuUbK4Q' ),
 ('Revolving Side Angle Pose','', 'Parivrtta Parsvakonasana', 'Improves flexibility, strengthens legs and core, opens the hips, chest, and shoulders, massages internal organs, improves digestion', 'intermediate', 'balancing, twist, standing', 'https://yoga-track.s3.us-east-2.amazonaws.com/revolving-side-angle.png', 'https://www.youtube.com/embed/XRfxkioaG-Q'),
 ('Side Angle Pose','', 'Parsvakonasana', 'Stretches the inner thighs, groins, and side body, Strengthens the quadriceps and hamstrings, as well as the hips, knees, and ankles, Improves stamina, Relieves low back pain, menstrual pain, and sciatica, Massages the abdominal organs, Opens the chest and shoulders', 'beginner', 'balancing, standing', 'https://yoga-track.s3.us-east-2.amazonaws.com/side-angle.png', 'https://www.youtube.com/embed/7fFWy2IT9FE'),
