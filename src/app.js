@@ -13,6 +13,8 @@ const morganOption = (NODE_ENV === 'production')? 'tiny' : 'common';
 
 const {CLIENT_ORIGIN} = require('./config');
 
+const path = require('path');
+
 app.use(cors());
 app.use(morgan(morganOption));
 app.use(helmet());
@@ -37,5 +39,7 @@ app.use(function errorHandler(error, req, res, next) {
     console.error(error);
     res.status(500).json(response);
 });
+
+app.use('/api/static', express.static(path.join(__dirname, 'public')))
 
 module.exports = app;

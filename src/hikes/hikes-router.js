@@ -39,7 +39,7 @@ hikesRouter
                     id: hike.id,
                     title: hike.title,
                     author: hike.author,
-                    assignedTracks: [],
+                    assignedTracks: [[], [], [], [], []],  
                     warmUp: [],
                     midHike: [],
                     peakTrack: [],
