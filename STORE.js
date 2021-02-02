@@ -48,8 +48,8 @@ const STORE = {
             benefits: 'Strengthens legs',
             img: "/static/images/hike1.jpg",
             utube: "",
-            level: 'beginner',
-            trackType: 'easy track',
+            track_level: 'beginner',
+            track_type: 'easy track',
         }, {
             id: 2,
             nameEng: 'Bend Trail',
@@ -57,8 +57,8 @@ const STORE = {
             benefits: 'Strengthens legs',
             img: "/static/images/hike2.jpg",
             utube: "",
-            level: 'beginner',
-            trackType: 'easy track',
+            track_level: 'beginner',
+            track_type: 'easy track',
         }, {
             id: 3,
             nameEng: 'Hanover Hill',
@@ -66,8 +66,8 @@ const STORE = {
             benefits: 'Strengthens legs',
             img: "/static/images/hike3.jpg",
             utube: "",
-            level: 'beginner',
-            trackType: 'easy track',
+            track_level: 'beginner',
+            track_type: 'easy track',
         },{
             id: 4,
             nameEng: 'Lakefront Trail',
@@ -75,8 +75,8 @@ const STORE = {
             benefits: 'Strengthens legs',
             img: "/static/images/hike4.jpg",
             utube: "",
-            level: 'beginner',
-            trackType: 'easy track',
+            track_level: 'beginner',
+            track_type: 'easy track',
         },{
             id: 5,
             nameEng: 'River Trail',
@@ -84,8 +84,8 @@ const STORE = {
             benefits: 'Strengthens legs',
             img: "/static/images/hike5.jpg",
             utube: "",
-            level: 'beginner',
-            trackType: 'easy track',
+            track_level: 'beginner',
+            track_type: 'easy track',
         },
     ]
 }

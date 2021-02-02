@@ -75,35 +75,36 @@ tracksRouter
         const knexInstance = req.app.get('db');
         const trackId = Number(req.params.track_id);
         const hikeId = Number(req.params.hike_id);
-        TracksService.getTrackById(knexInstance, trackId)
-            .then(track => {
+        const track = STORE.tracks.find(t => t.id == trackId);
+       // TracksService.getTrackById(knexInstance, trackId)
+         //   .then(track => {
                 if (!track) {
                     return res.status(404).send({ error: { message: `Track with id ${trackId} doesn't exist` } });
                 }
                 res.track = track;
-
+                console.log(track);
                 TracksService.getTrackAttNotesById(knexInstance, trackId, hikeId)
                     .then(attributes => {
+                        console.log(attributes);
                         if (!attributes[0]) {
                             return res.status(200).json(serializeTrack(res.track));
                         } else {
                             let attributesList = {};
-                            let notes = {};
+                            let notes = attributes[0].notes;
 
                             attributes.forEach(att => attributesList[att.attribute] = true);
-                            attributes.forEach(att => notes[att.notes] = true);
+                          //  attributes.forEach(att => notes[att.notes] = true);
                             
-                            res.trackAttributes = {
+                            res.track = {
                                 ...res.track,
                                 attributesList: Object.keys(attributesList),
-                                notes: Object.keys(notes)
+                                notes
                             };
-                            next();
+                            return res.status(200).json(serializeTrack(res.track));
                         }
-                        next();
                     })
                     .catch(next);
-            });
+           // });
     })
     .get((req, res, next) => {
         res.status(200).json(serializeAttTrack(res.trackAttributes));

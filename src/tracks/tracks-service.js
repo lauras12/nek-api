@@ -19,7 +19,6 @@ const TracksService = {
                 'ps.id',
                 'ps.name_eng',
                 'ps.alias',
-                'ps.name_san',
                 'ps.benefits',
                 'ps.track_type',
                 'ps.track_level',
@@ -40,14 +39,12 @@ const TracksService = {
                 'ps_att.attribute',
                 'ps_att.track_id',
                 'ps_att.assigned_hike_id',
-                'ps_att.author',
                 'pn.notes',
             )
-            .join(
-                'track_notes AS pn',
-                'ps_att.track_id',
-                'pn.track_id'
-            )
+            .leftJoin('track_notes AS pn', function () {
+                this.on('ps_att.track_id', '=', 'pn.track_id');
+                this.on('ps_att.assigned_hike_id', '=', 'pn.assigned_hike_id');
+             })
             .where(
                 {
                     'ps_att.assigned_hike_id': hikeId,
