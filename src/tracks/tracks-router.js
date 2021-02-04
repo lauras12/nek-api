@@ -115,7 +115,6 @@ tracksRouter
     .all(requireAuth)
     .post(jsonParser, (req, res, next) => {
         const knexInstance = req.app.get('db');
-        const author = req.user.id;
         const { assigned_hike_id, track_id, attribute } = req.body;
         for (const [key, value] of Object.entries(req.body)) {
             if (value === null) {
@@ -126,7 +125,6 @@ tracksRouter
         Promise.all(attribute.map((att, index) => {
             const newAtt = {
                 assigned_hike_id,
-                author: author,
                 track_id,
                 attribute: att
             };
@@ -152,8 +150,7 @@ tracksRouter
     .post(jsonParser, (req, res, next) => {
         const knexInstance = req.app.get('db');
         const { assigned_hike_id, track_id, notes } = req.body;
-        const author = req.user.id;
-        const newNote = { assigned_hike_id, track_id, author, notes };
+        const newNote = { assigned_hike_id, track_id, notes };
        
         for (const [key, value] in Object.entries(newNote)) {
             if (value === null) {

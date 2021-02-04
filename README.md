@@ -5,7 +5,7 @@ Check it out at [trail-track](https://nek-client.vercel.app/).
 Trail Track is a Full-Stack mobile first responsive web application for all hikers and people who like to hike! The user can create an account where he/she can save hikes into trails as a way to keep track of the various hikes the users does.
 
 ## WHY MAKE THIS APP?
-As someone who loves to journal and wanted a way ot keep track of all of her kies without writing htem down every time, Trail Track was created.  This app was also inspried by being able to be a sort of online journal keeping of hikes.
+As someone who loves to journal and wanted a way ot keep track of all of her hike without writing each one down every time, Trail Track was created.  This app was also inspried by being able to be a sort of online journal keeping of hikes.
 
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/k0FZwFZ/Trail-Track1.png" alt="Trail-Track1" border="0" width='200'></a>
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/wWLTg3d/Trail-Track2.png" alt="Trail-Track2" border="0" width='200'></a><br /><a target='_blank' href='https://imgbb.com/'></a><br />

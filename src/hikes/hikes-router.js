@@ -94,6 +94,7 @@ hikesRouter
         const hikeId = Number(req.params.hike_id);
         HikesService.getAllTracksInHike(knexInstance, hikeId)
             .then(hike => {
+                console.log(hike);
                 if (!hike[0]) {
                     return res.status(400).send({ error: { message: `Hike with id ${hikeId} doesn't exist` } });
                 }

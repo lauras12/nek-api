@@ -23,6 +23,14 @@ const STORE = {
         }
     ],
 
+    sections: {
+        1: 'warmUp',
+        2: 'midHike',
+        3: 'breakTracks',
+        4: 'peakTrack',
+        5: 'afterPeak'
+      },
+            
     attributes: [
         {
             id: 1,

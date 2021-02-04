@@ -1,3 +1,4 @@
+const { sections } = require('../../STORE.js');
 const HikesService = {
     getAllUserHikes: (knex) => {
         return knex
@@ -37,21 +38,22 @@ const HikesService = {
                 'fl_ps.author',
                 'fl_ps.track_id',
                 'fl_ps.section_hike_id',
-                'sfl.section',
+               /* 'sfl.section',*/
             )
             .leftJoin(
                 'hikes_tracks AS fl_ps',
                 'fl.id',
                 'fl_ps.main_hike_id')
-            .leftJoin(
+           /* .leftJoin(
                 'section_hikes AS sfl',
                 'fl_ps.section_hike_id',
                 'sfl.id'
-            )
+            )*/
             .where(
                 'fl.id',
                 hikeId
-            );
+            ).then((data) => 
+            data.map((obj) => ({...obj, section: sections[obj['section_hike_id']]})));
     },
 
     deleteTrackFromHike: (knex, trackId,hikeId) => {
