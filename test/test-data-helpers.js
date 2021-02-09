@@ -3,46 +3,30 @@ function makeTracksArray() {
         {
             id: 1,
             name_eng: 'test-track 1',
-            alias: 'alias1',
-            name_san: 'san 1',
             benefits: 'track1 benefits',
             track_level: 'track1 level',
-            track_type: 'track1 type',
-            img: 'image1',
-            video: 'video1',
+            track_type: 'track1 type'
         },
         {
             id: 2,
             name_eng: 'test-track 2',
-            alias: 'alias2',
-            name_san: 'san 2',
             benefits: 'track2 benefits',
             track_level: 'track2 level',
-            track_type: 'track2 type',
-            img: 'image2',
-            video: 'video2',
+            track_type: 'track2 type'
         },
         {
             id: 3,
             name_eng: 'test-track 3',
-            alias: 'alias3',
-            name_san: 'san 3',
             benefits: 'track3 benefits',
             track_level: 'track3 level',
-            track_type: 'track3 type',
-            img: 'image3',
-            video: 'video3',
+            track_type: 'track3 type'
         },
         {
             id: 4,
             name_eng: 'test-track 4',
-            alias: 'alias4',
-            name_san: 'san 4',
             benefits: 'track4 benefits',
             track_level: 'track4 level',
-            track_type: 'track4 type',
-            img: 'image4',
-            video: 'video4',
+            track_type: 'track4 type'
         }
     ];
 }
@@ -225,24 +209,16 @@ function makeMaliciousTrack() {
     const maliciousTrack = {
         id: 911,
         name_eng: '<script>alert("xss");</script>',
-        alias: '<script>alert("xss");</script>',
-        name_san: '<script>alert("xss");</script>',
         benefits: '<img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">',
         track_level: '<img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">',
         track_type: '<img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">',
-        img: '<img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">',
-        video: 'video1',
     };
 
     const expectedTrack = {
         name_eng: '&lt;script&gt;alert("xss");&lt;/script&gt;',
-        alias: '&lt;script&gt;alert("xss");&lt;/script&gt;',
-        name_san: '&lt;script&gt;alert("xss");&lt;/script&gt;',
         benefits: '<img src="https://url.to.file.which/does-not.exist">',
         track_level: '<img src="https://url.to.file.which/does-not.exist">',
         track_type: '<img src="https://url.to.file.which/does-not.exist">',
-        img: '<img src="https://url.to.file.which/does-not.exist">',
-        video: 'video1',
     };
 
     return {
