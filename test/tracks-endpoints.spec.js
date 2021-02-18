@@ -3,6 +3,7 @@ const app = require('../src/app');
 const helpers = require('./test-data-helpers');
 const fixtures = require('./test-fixtures');
 const bcrypt = require('bcryptjs');
+const S = require('../STORE.js');
 
 describe('Tracks endpoints', function () {
     let db;
@@ -21,23 +22,11 @@ describe('Tracks endpoints', function () {
     afterEach('cleanup', () => fixtures.cleanTables(db));
 
     describe(`GET /api/tracks`, () => {
-        context('Given no tracks', () => {
-            it('responds with 200 and empty list', () => {
-                return supertest(app)
-                    .get('/api/tracks')
-                    .expect(200, []);
-            });
-        });
 
         context('Given tracks inside db', () => {
-            beforeEach('insert tracks', () => {
-                return db
-                    .into('trail_tracks')
-                    .insert(testTracks);
-            });
 
             it('responds with 200 and all tracks', () => {
-                const expectedTracks = testTracks.map(item =>
+                const expectedTracks = S.tracks.map(item =>
                     fixtures.makeExpectedListTrack(item)
                 );
                 return supertest(app)
@@ -46,27 +35,6 @@ describe('Tracks endpoints', function () {
             });
         });
 
-        context('Given an XSS attack', () => {
-            const { maliciousTrack, expectedTrack } = helpers.makeMaliciousTrack();
-            beforeEach('insert maliciousTrack', () => {
-                return db
-                    .into('trail_tracks')
-                    .insert(maliciousTrack);
-            });
-            it('removes XSS attack', () => {
-                return supertest(app)
-                    .get('/api/tracks')
-                    .expect(200)
-                    .expect(res => {
-                        expect(res.body[0].name_eng).to.eql(expectedTrack.name_eng);
-                        expect(res.body[0].name_san).to.eql(expectedTrack.name_san);
-                        expect(res.body[0].alias).to.eql(expectedTrack.alias);
-                        expect(res.body[0].track_level).to.eql(expectedTrack.track_level);
-                        expect(res.body[0].track_type).to.eql(expectedTrack.track_type);
-                        expect(res.body[0].img).to.eql(expectedTrack.img);
-                    });
-            });
-        });
     });
 
     describe('GET /api/hike/:track_id', () => {
@@ -95,15 +63,11 @@ describe('Tracks endpoints', function () {
                     ...user,
                     password: bcrypt.hashSync(user.password, 1)
                 }));
-                const tracks = testTracks;
+              
                 return db
                     .into('users')
                     .insert(users)
-                    .then(() => {
-                        return db
-                            .into('trail_tracks')
-                            .insert(tracks);
-                    });
+                  
             });
 
             it('responds with 200 and specified track', () => {
@@ -116,39 +80,7 @@ describe('Tracks endpoints', function () {
             });
         });
 
-        context('Given an XSS attack', () => {
-            const { maliciousTrack, expectedTrack } = helpers.makeMaliciousTrack();
-            beforeEach('insert users', () => {
-                const users = testUsers.map(user => ({
-                    ...user,
-                    password: bcrypt.hashSync(user.password, 1)
-                }));
-                const track = maliciousTrack;
-                return db
-                    .into('users')
-                    .insert(users)
-                    .then(() => {
-                        return db
-                            .into('trail_tracks')
-                            .insert(track);
-                    });
-            });
 
-            it('removes XSS attack', () => {
-                return supertest(app)
-                    .get(`/api/hike/${maliciousTrack.id}`)
-                    .set('Authorization', fixtures.makeAuthHeader(testUsers[0]))
-                    .expect(200)
-                    .expect(res => {
-                        expect(res.body.name_eng).to.eql(expectedTrack.name_eng);
-                        expect(res.body.name_san).to.eql(expectedTrack.name_san);
-                        expect(res.body.alias).to.eql(expectedTrack.alias);
-                        expect(res.body.track_level).to.eql(expectedTrack.track_level);
-                        expect(res.body.track_type).to.eql(expectedTrack.track_type);
-                        expect(res.body.img).to.eql(expectedTrack.img);
-                    });
-            });
-        });
     });
 
     describe('GET /api/hike/hike_id/track_id', () => {
@@ -185,7 +117,7 @@ describe('Tracks endpoints', function () {
                     .insert(users)
                     .then(() => {
                         return db
-                            .into('trail_tracks')
+                            .into('hike_tracks')
                             .insert(tracks);
                     });
             });
@@ -258,25 +190,18 @@ describe('Tracks endpoints', function () {
                         .insert(testHikes)
                         .then(() => {
                             return db
-                                .into('trail_tracks')
-                                .insert(testTracks)
-                                .then(() => {
-                                    return db
-                                        .into('track_attributes')
-                                        .insert(testTrackAttributes);
-                                });
+                                .into('track_attributes')
+                                .insert(testTrackAttributes);
                         });
                 });
         });
     
         it('creates a new attribute object', () => {
             const testTrack = testTracks[1].id;
-            const testUser = testUsers[0].id;
             const testHike = testHikes[1].id;
             const testAttributes = ['new attribute1 for track2', 'new attribute 2 for track 2'];
             const newAttributesReq = {
                 assigned_hike_id: testHike,
-                author: testUser,
                 track_id: testTrack,
                 attribute: testAttributes,
             };
@@ -288,7 +213,6 @@ describe('Tracks endpoints', function () {
                 .expect(201)
                 .expect(res => {
                     expect(res.body[0].assigned_hike_id).to.eql(newAttributesReq.assigned_hike_id);
-                    expect(res.body[0].author).to.eql(newAttributesReq.author);
                     expect(res.body[0].track_id).to.eql(newAttributesReq.track_id);
                     expect(res.body[0].attribute).to.eql(newAttributesReq.attribute[0]);
                 })
@@ -298,8 +222,8 @@ describe('Tracks endpoints', function () {
                         .select('*')
                         .where({'track_id': res.body[0].track_id || 0, assigned_hike_id: res.body[0].assigned_hike_id} )
                         .then(rows => {
+                            expect(rows[0]).to.not.be.undefined;
                             expect(rows[0].assigned_hike_id).to.eql(newAttributesReq.assigned_hike_id);
-                            expect(rows[0].author).to.eql(newAttributesReq.author);
                             expect(rows[0].track_id).to.eql(newAttributesReq.track_id);
                             expect(rows[0].attribute).to.eql(newAttributesReq.attribute[0]);
                         });
@@ -320,11 +244,7 @@ describe('Tracks endpoints', function () {
                     return db
                         .into('hikes')
                         .insert(testHikes)
-                        .then(() => {
-                            return db
-                                .into('trail_tracks')
-                                .insert(testTracks);
-                        });
+                        
                 });
         });
 
@@ -349,7 +269,6 @@ describe('Tracks endpoints', function () {
                 .expect(res => {
                     expect(res.body).to.have.property('id');
                     expect(res.body.assigned_hike_id).to.eql(newNoteReq.assigned_hike_id);
-                    expect(res.body.author).to.eql(newNoteReq.author);
                     expect(res.body.track_id).to.eql(newNoteReq.track_id);
                     expect(res.body.notes).to.eql(newNoteReq.notes);
                     expect(res.headers.location).to.eql(`/api/hikenote/${res.body.track_id}/${res.body.id}`);
@@ -362,7 +281,6 @@ describe('Tracks endpoints', function () {
                         .first()
                         .then(row => {
                             expect(row.assigned_hike_id).to.eql(newNoteReq.assigned_hike_id);
-                            expect(row.author).to.eql(newNoteReq.author);
                             expect(row.track_id).to.eql(newNoteReq.track_id);
                             expect(row.notes).to.eql(newNoteReq.notes);
                         });

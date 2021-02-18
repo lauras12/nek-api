@@ -1,5 +1,5 @@
 const STORE = {
-    hikes: [
+    /*hikes: [
         {
             id: 1,
             name: 'laura',
@@ -22,6 +22,7 @@ const STORE = {
             afterPeak: [5, 6, 7, 2],
         }
     ],
+    */
 
     sections: {
         1: 'warmUp',
@@ -30,7 +31,7 @@ const STORE = {
         4: 'peakTrack',
         5: 'afterPeak'
       },
-            
+
     attributes: [
         {
             id: 1,

@@ -168,25 +168,21 @@ function makeNotesArray(hikes, tracks, users) {
 function makeTrackAttributesArray(users, hikes, tracks) {
     return [
         {
-            author: 1,
             assigned_hike_id: 1,
             track_id: 1,
             attribute: 'some attribute for track1'
         },
         {
-            author: 2,
             assigned_hike_id: 1,
             track_id: 1,
             attribute: 'some attribute for track1'
         },
         {
-            author: 1,
             assigned_hike_id: 1,
             track_id: 2,
             attribute: 'some attribute1 for track2'
         },
         {
-            author: 1,
             assigned_hike_id: 1,
             track_id: 2,
             attribute: 'some attribute2 for track2'
