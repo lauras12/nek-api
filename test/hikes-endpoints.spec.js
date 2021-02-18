@@ -271,13 +271,8 @@ describe('Hikes endpoints', function () {
                                 .insert(testSectionHikes)
                                 .then(() => {
                                     return db
-                                        .into('trail_tracks')
-                                        .insert(testTracks)
-                                        .then(() => {
-                                            return db
-                                                .into('hikes_tracks')
-                                                .insert(testHikesTracks);
-                                        });
+                                        .into('hikes_tracks')
+                                        .insert(testHikesTracks);
                                 });
                         });
                 });
