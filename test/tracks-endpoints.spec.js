@@ -191,7 +191,7 @@ describe('Tracks endpoints', () => {
         it('creates a new attribute object', () => {
             const testTrack = testTracks[1].id;
             const testHike = testHikes[1].id;
-            const testAttributes = ['new attribute1 for track2', 'new attribute 2 for track 2'];
+            const testAttributes = ['new attribute1 for track2'];
             const newAttributesReq = {
                 assigned_hike_id: testHike,
                 track_id: testTrack,
@@ -213,6 +213,7 @@ describe('Tracks endpoints', () => {
                         .from('track_attributes')
                         .select('*')
                         .where({'track_id': res.body[0].track_id || 0, assigned_hike_id: res.body[0].assigned_hike_id} )
+                        .orderBy('id')
                         .then(rows => {
                             expect(rows[0]).to.not.be.undefined;
                             expect(rows[0].assigned_hike_id).to.eql(newAttributesReq.assigned_hike_id);

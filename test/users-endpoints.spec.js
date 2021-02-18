@@ -131,7 +131,7 @@ describe('Users endpoint', () => {
                         expect(res.body.password).to.not.have.property('password');
                         expect(res.headers.location).to.eql(`/api/register/${res.body.id}`);
                     })
-                    .expect(res => {
+                    .then(res => {
                         return db
                             .from('users')
                             .select('*')
