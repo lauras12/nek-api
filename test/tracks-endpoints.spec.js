@@ -72,7 +72,7 @@ describe('Tracks endpoints', function () {
 
             it('responds with 200 and specified track', () => {
                 const trackId = 2;
-                const expectedTrack = fixtures.makeExpectedFullTrack(testTracks[trackId - 1]);
+                const expectedTrack = fixtures.makeExpectedFullTrack(S.tracks.find(t => t.id === trackId));
                 return supertest(app)
                     .get(`/api/hike/${trackId}`)
                     .set('Authorization', fixtures.makeAuthHeader(testUsers[0]))

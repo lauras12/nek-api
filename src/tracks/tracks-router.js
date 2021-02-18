@@ -60,15 +60,16 @@ tracksRouter
     .all((req, res, next) => {
         const knexInstance = req.app.get('db');
         const trackId = req.params.track_id;
-        TracksService.getTrackById(knexInstance, trackId)
-            .then(track => {
+        const track = STORE.tracks.find(t => t.id == trackId);
+       // TracksService.getTrackById(knexInstance, trackId)
+        //    .then(track => {
                 if (!track) {
                     return res.status(404).send({ error: { message: `Track with id ${trackId} doesn't exist` } });
                 }
                 res.track = track;
                 next();
-            })
-            .catch(next);
+          //  })
+           // .catch(next);
     })
     .get((req, res, next) => {
         res.status(200).json(serializeTrack(res.track));
