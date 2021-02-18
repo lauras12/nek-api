@@ -15,9 +15,14 @@ describe('Hikes endpoints', function () {
         });
         app.set('db', db);
     });
+
     after('disconnect from db', () => db.destroy());
     beforeEach('cleanup', () => fixtures.cleanTables(db));
     afterEach('cleanup', () => fixtures.cleanTables(db));
+
+    it('works', () => {
+      expect(1).to.eql(1);
+    })
 
     describe('GET /api/hikes', () => {
         context('Given no hikes in db', () => {
@@ -63,7 +68,7 @@ describe('Hikes endpoints', function () {
                     .expect(200, expectedHikes);
             });
         });
-    });
+    }); 
 
     describe('POST /api/hikes', () => {
         beforeEach('insert users', () => {
@@ -101,7 +106,7 @@ describe('Hikes endpoints', function () {
                     expect(res.body.author).to.eql(newHike.author);
                     expect(res.headers.location).to.eql(`/api/hikes/${res.body.id}`);
                 })
-                .expect(res => {
+                .then(res => {
                     return db
                         .from('hikes')
                         .select('*')
@@ -157,7 +162,7 @@ describe('Hikes endpoints', function () {
                     expect(res.body.section_hike_id).to.eql(newHikeTrack.section_hike_id);
                     expect(res.headers.location).to.eql(`/api/hike-track/${res.body.main_hike_id}`);
                 })
-                .expect(res => {
+                .then(res => {
                     return db
                         .from('hikes_tracks')
                         .select('*')
@@ -287,7 +292,7 @@ describe('Hikes endpoints', function () {
                 author: testUsers[0].id,
                 assignedTracks: [[1], [1], [], [], []]
             };
-            
+
             return supertest(app)
                 .delete(`/api/delete/${hikeId}/${trackToRemove}`)
                 .set('Authorization', fixtures.makeAuthHeader(testUsers[0]))
@@ -300,4 +305,5 @@ describe('Hikes endpoints', function () {
                 });
         });
     });
+
 });

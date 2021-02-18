@@ -5,7 +5,7 @@ const fixtures = require('./test-fixtures');
 const bcrypt = require('bcryptjs');
 const S = require('../STORE.js');
 
-describe('Tracks endpoints', function () {
+describe('Tracks endpoints', () => {
     let db;
 
     const { testTracks, testUsers, testHikes, testNotes, testTrackAttributes } = helpers.makeTestFixtures();
@@ -208,7 +208,7 @@ describe('Tracks endpoints', function () {
                     expect(res.body[0].track_id).to.eql(newAttributesReq.track_id);
                     expect(res.body[0].attribute).to.eql(newAttributesReq.attribute[0]);
                 })
-                .expect(res => {
+                .then(res => {
                     return db
                         .from('track_attributes')
                         .select('*')
@@ -265,7 +265,7 @@ describe('Tracks endpoints', function () {
                     expect(res.body.notes).to.eql(newNoteReq.notes);
                     expect(res.headers.location).to.eql(`/api/hikenote/${res.body.track_id}/${res.body.id}`);
                 })
-                .expect(res => {
+                .then(res => {
                     return db
                         .from('track_notes')
                         .select('*')
