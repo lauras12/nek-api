@@ -139,21 +139,16 @@ describe('Tracks endpoints', function () {
                     .insert(users)
                     .then(() => {
                         return db
-                            .into('trail_tracks')
-                            .insert(testTracks)
+                            .into('hikes')
+                            .insert(testHikes)
                             .then(() => {
                                 return db
-                                    .into('hikes')
-                                    .insert(testHikes)
+                                    .into('track_attributes')
+                                    .insert(testTrackAttributes)
                                     .then(() => {
                                         return db
-                                            .into('track_attributes')
-                                            .insert(testTrackAttributes)
-                                            .then(() => {
-                                                return db
-                                                    .into('track_notes')
-                                                    .insert(testNotes);
-                                            });
+                                            .into('track_notes')
+                                            .insert(testNotes);
                                     });
                             });
                     });
