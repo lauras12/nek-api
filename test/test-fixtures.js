@@ -124,14 +124,13 @@ function makeExpectedListTrack(track) {
 function makeExpectedFullTrack(track) {
     return ({
         id: track.id,
-        name_eng: track.name_eng,
+        name_eng: track.name_eng || '',
         alias: track.alias,
-        name_san: track.name_san,
+        name_san: track.name_san || '',
         benefits: track.benefits,
         track_type: track.track_type,
         track_level: track.track_level,
         img: track.img,
-        video: track.video,
     });
 }
 
