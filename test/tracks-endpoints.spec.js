@@ -115,11 +115,7 @@ describe('Tracks endpoints', function () {
                 return db
                     .into('users')
                     .insert(users)
-                    .then(() => {
-                        return db
-                            .into('hike_tracks')
-                            .insert(tracks);
-                    });
+                    
             });
             it('responds 200 and returns selected track without attributes or notes', () => {
                 const trackId = 2;
