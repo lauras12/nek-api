@@ -22,20 +22,26 @@ const serializeTrack = (track) => {
 }
 
 const serializeAttTrack = (track) => {
-    return ({
-        id: track.id,
-        name_eng: xss(track.name_eng),
-        alias: xss(track.alias),
-        name_san: xss(track.name_san),
-        benefits: xss(track.benefits),
-        track_level: xss(track.track_level),
-        track_type: xss(track.track_type),
-        img: xss(track.img),
-        video: track.video,
-        attributesList: track.attributesList.map(att => xss(att)),
-        notes: track.notes.map(note => xss(note)),
-    });
-}
+    const sTrack = {
+          id: track.id,
+          name_eng: xss(track.name_eng),
+          alias: xss(track.alias),
+          name_san: xss(track.name_san),
+          benefits: xss(track.benefits),
+          track_level: xss(track.track_level),
+          track_type: xss(track.track_type),
+          img: xss(track.img),
+          video: track.video
+      };
+  
+      if (track.notes)
+        sTrack.notes = xss(track.notes);
+  
+      if (track.attributesList)
+        sTrack.attributesList = track.attributesList.map(att => xss(att));
+  
+      return sTrack;
+  }
 
 tracksRouter
     .route('/api/tracks')
@@ -87,7 +93,7 @@ tracksRouter
                     .then(attributes => {
                         console.log(attributes);
                         if (!attributes[0]) {
-                            return res.status(200).json(serializeTrack(res.track));
+                            return res.status(200).json(serializeAttTrack(res.track));
                         } else {
                             let attributesList = {};
                             let notes = attributes[0].notes;
@@ -100,7 +106,7 @@ tracksRouter
                                 attributesList: Object.keys(attributesList),
                                 notes
                             };
-                            return res.status(200).json(serializeTrack(res.track));
+                            return res.status(200).json(serializeAttTrack(res.track));
                         }
                     })
                     .catch(next);

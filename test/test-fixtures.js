@@ -135,32 +135,24 @@ function makeExpectedFullTrack(track) {
 }
 
 function makeExpectedTrackAttributes(user, track, hikeId, attributes) {
-    const trackAttributes = attributes.filter(att => att.author === user.id);
-    const newerTrackAttributes = trackAttributes.filter(att => att.assigned_hike_id === hikeId);
-    const newestTrackAttributes = newerTrackAttributes.filter(att => att.track_id === track.id);
-    let attributesList = {};
-    newestTrackAttributes.forEach(att => attributesList[att.attribute] = true);
+    const attributesList = attributes.filter(att => att.track_id === track.id).map(att => att.attribute);
+
     return ({
         id: track.id,
-        name_eng: track.name_eng,
+        name_eng: track.name_eng || '',
         alias: track.alias,
-        name_san: track.name_san,
+        name_san: track.name_san || '',
         benefits: track.benefits,
         track_type: track.track_type,
         track_level: track.track_level,
         img: track.img,
-        video: track.video,
-        attributesList: Object.keys(attributesList),
+        attributesList,
     });
 }
 
 function makeExpectedTrackNotes(user, track, hikeId, notes) {
-    const trackNotes = notes.filter(n => n.author === user.id);
-    const newerTrackNotes = trackNotes.filter(n => n.assigned_hike_id === hikeId);
-    const newestTrackNotes = newerTrackNotes.filter(n => n.track_id === track.id);
-    let notesList = {};
-    newestTrackNotes.forEach(n => notesList[n.notes] = true);
-
+    const trackNotes = notes.find(n => n.track_id == track.id);
+    
     return ({
         id: track.id,
         name_eng: track.name_eng,
@@ -170,8 +162,7 @@ function makeExpectedTrackNotes(user, track, hikeId, notes) {
         track_type: track.track_type,
         track_level: track.track_level,
         img: track.img,
-        video: track.video,
-        notes: Object.keys(notesList)
+        notes: trackNotes.notes
     });
 }
 

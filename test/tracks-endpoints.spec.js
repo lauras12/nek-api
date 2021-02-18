@@ -157,7 +157,8 @@ describe('Tracks endpoints', function () {
             it('responds 200 returning track with attributes and notes', () => {
                 const trackId = 2;
                 const hikeId = 1;
-                const expectedTrackAttNotes = fixtures.makeExpectedTrackAttNotes(testUsers[0], testTracks[trackId - 1], hikeId, testTrackAttributes, testNotes);
+                const track = S.tracks.find(t => t.id === trackId);
+                const expectedTrackAttNotes = fixtures.makeExpectedTrackAttNotes(testUsers[0], track, hikeId, testTrackAttributes, testNotes);
                 return supertest(app)
                     .get(`/api/hike/${hikeId}/${trackId}`)
                     .set('Authorization', fixtures.makeAuthHeader(testUsers[0]))

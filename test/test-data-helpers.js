@@ -138,28 +138,24 @@ function makeNotesArray(hikes, tracks, users) {
             id: 1,
             assigned_hike_id: 1,
             track_id: 1,
-            author: 1,
             notes: 'this is test note1'
         },
         {
             id: 2,
             assigned_hike_id: 1,
             track_id: 2,
-            author: 1,
             notes: 'this is test note2'
         },
         {
             id: 3,
             assigned_hike_id: 1,
             track_id: 3,
-            author: 1,
             notes: 'this is test note3'
         },
         {
             id: 4,
             assigned_hike_id: 1,
             track_id: 4,
-            author: 1,
             notes: 'this is test note4'
         }
     ];
