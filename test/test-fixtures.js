@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 function cleanTables(db) {
     return db.raw(
         `TRUNCATE
-            trail_tracks,
             users,
             hikes,
             section_hikes,

@@ -130,18 +130,14 @@ describe('Hikes endpoints', function () {
                         .insert(testHikes)
                         .then(() => {
                             return db
-                                .into('trail_tracks')
-                                .insert(testTracks)
-                                .then(() => {
-                                    return db
-                                        .into('section_hikes')
-                                        .insert(testSectionHikes);
-                                });
+                                .into('section_hikes')
+                                .insert(testSectionHikes);
                         });
                 });
         });
 
         it('returns 201 and creates new hike-track', () => {
+            console.log(testHikes);
             const newHikeTrack = {
                 main_hike_id: testHikes[2].id,
                 author: testUsers[1].id,

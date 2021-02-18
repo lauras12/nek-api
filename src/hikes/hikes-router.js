@@ -77,7 +77,7 @@ hikesRouter
             }
         }
 
-        HikesService.insertTrackIntoHikes(knexInstance, newHikesTrack)
+        return HikesService.insertTrackIntoHikes(knexInstance, newHikesTrack)
             .then(hikesTrack => {
                 res
                     .status(201)
