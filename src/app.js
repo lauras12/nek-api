@@ -26,7 +26,7 @@ app.use(hikesRouter);
 
 
 app.get('/', (req, res) => {
-    res.send('Hello, from Trail capstone!');
+    res.send('Hello, from Trail capstone!!');
 });
 
 app.use(function errorHandler(error, req, res, next) {
